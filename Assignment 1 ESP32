@@ -1,0 +1,82 @@
+const int LEDPIN1 = 15; // Assigned pin number 15 for LED output on ESP32.
+const int LEDPIN2 = 21; // Assigned pin number 21 for LED output on ESP32.
+const int PushButton1 = 22; // Assigned pin number 22 for PushButton1 output on ESP32.
+const int PushButton2 = 23; // Aassigned pin number 23 for PushButton2 output on ESP32.
+// This setup will assigned the value to each variable as per the pulse output
+
+
+
+void setup()
+{  
+Serial.begin(9600); // This will assigned baud rate 9600.
+pinMode(LEDPIN1, OUTPUT); // This will declare led pin 1 as output.
+pinMode(LEDPIN2, OUTPUT); // This will declare led pin 2 as output.
+pinMode(PushButton1, INPUT); // This will declare push button 1 as digital input.
+pinMode(PushButton2, INPUT); // This will declare push button 2 as digital input.
+}
+
+void loop()
+{
+// digitalRead function stores the Push button state
+// if condition checks the push button 1 is pressed
+// if pressed LED will turn on otherwise remain off 
+if(digitalRead(PushButton1)==LOW) // This will run the pulses in normal mode
+{ 
+  int a=1100; // Variable assigned to delay the pulse when the pulse is at high
+  const int b=1200; // Variable assigned to delay the pulse when the pulse is at high
+  if(digitalRead(PushButton2)==LOW) //when the push button is at low level 
+  {Serial.println("NORMAL MODE"); //starting the nomal mode
+   digitalWrite(LEDPIN2, HIGH); //light up the LED 2
+   delayMicroseconds(50); //delay for 50 microseconds
+   digitalWrite(LEDPIN2, LOW); //turn off the LED 2
+   for(int i = 0; i<=16; i++) //created for loop to generate the pulse 16 times as per the calculations
+   {
+    digitalWrite(LEDPIN1, HIGH); //light up the LED 1
+    delayMicroseconds(a); //delay of given variable value
+    digitalWrite(LEDPIN1, LOW); //light off the LED 1
+    delayMicroseconds(b); //delay of given variable value
+    a=a+50;//add 50 delay to the pulse of the given variable
+    Serial.println(a);//print the addition vaalue
+   }
+    digitalWrite(LEDPIN1, LOW);//add the delay to in LED 1
+    delayMicroseconds(2000);
+  }
+  else
+  {
+  Serial.println("Mode 2");
+  const int b=1200;
+  int a=1950;
+  digitalWrite(LEDPIN2, HIGH);
+  delayMicroseconds(50);
+  digitalWrite(LEDPIN2, LOW); 
+
+  for(int i = 0; i<=16; i++)
+  {
+    digitalWrite(LEDPIN1, HIGH);
+    delayMicroseconds(a);
+    digitalWrite(LEDPIN1, LOW);
+    delayMicroseconds(b);
+    a=a-50;
+    Serial.println(a);
+  }
+    digitalWrite(LEDPIN1, LOW);
+    delayMicroseconds(2000);
+
+  }
+  
+
+}
+else
+{
+  digitalWrite(LEDPIN1,LOW);
+    digitalWrite(LEDPIN2,LOW);
+}
+
+ // digitalRead function stores the Push button state 
+// in variable push_button_state
+
+// if condition checks if push button 2 is pressed
+// if pressed LED will turn on otherwise remain off
+  
+
+}
